@@ -1,0 +1,8 @@
+work
+*.pyc
+TODO
+doc.local
+test
+lib
+*secrets.py
+boot_out.txt
