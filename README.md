@@ -12,7 +12,9 @@ Main changes:
 
   - support serving static files (but not automatically below a given root)
   - support pre-compressed files (a request for `foo.html` will return
-    the content of `foo.html.gz` instead if it exists)
+    the content of `foo.html.gz` instead if it exists).
+    Serving jquery-min.js.gz takes only 5 seconds instead of 15 seconds
+    and only takes up one third of the flash that the uncompressed file does!
   - paths in routes can be regular expressions
   - request handlers must be methods (need to subclass `ehttpserver.Server`)
   - request handlers have the signature
@@ -124,7 +126,7 @@ Copyright 2023 [Anthony Zhang (Uberi)](http://anthonyz.ca).
 The source code is available online at
 [GitHub](https://github.com/bablokb/circuitpython-ehttpserver).
 
-Based on /biplane/ from [GitHub](https://github.com/Uberi/biplane).
+Based on _biplane_ from [GitHub](https://github.com/Uberi/biplane).
 
 This program is made available under the MIT license. See ``LICENSE.txt``
 in the project's root directory for more information.
