@@ -3,6 +3,8 @@ import time
 import re
 import errno
 import os
+from sys import implementation
+import socketpool
 
 __version__ = "0.0.0+auto.0"
 __repo__ = "https://github.com/bablokb/ehttpserver.git"
@@ -173,6 +175,11 @@ class Server:
             listen_on=('0.0.0.0', 80), max_parallel_connections=5):
     """ start server """
     server_socket.setblocking(False)
+    try:
+      server_socket.setsockopt(
+        socketpool.SocketPool.SOL_SOCKET,socketpool.SocketPool.SO_REUSEADDR, 1)
+    except:
+      pass
     server_socket.bind(listen_on)
     server_socket.listen(max_parallel_connections)
     client_processors = []
