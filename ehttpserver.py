@@ -41,7 +41,7 @@ class BufferedNonBlockingSocket:
         if self.end == 0:  # client closed connection, there's no more to read
           break
       except OSError as e:
-        if e.errno != errno.EAGAIN:
+        if e.errno not in [errno.EAGAIN,errno.ETIMEDOUT]:
           raise
       yield b""  # client is not done sending yet, try again
 
@@ -53,7 +53,7 @@ class BufferedNonBlockingSocket:
       try:
         bytes_sent += self.sock.send(data[bytes_sent:])
       except OSError as e:
-        if e.errno != errno.EAGAIN:  # still pending, try again
+        if e.errno not in [errno.EAGAIN,errno.ETIMEDOUT]:   # still pending
           raise
 
 
